@@ -12,7 +12,8 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <converters:BooleanToVisibilityHiddenConverter x:Key="BTVHC" />
-
+        <converters:MultiBoolToVisibilityHiddenConverter x:Key="MBTVHC" />
+        
         <CollectionViewSource x:Key="Navigation.Items.Static"
                               Source="{Binding Path=StaticItems}" />
         <CollectionViewSource x:Key="Navigation.Items.Dynamic"
@@ -33,12 +34,19 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Border Background="DarkRed"
-                        Visibility="{
+                <Border Background="DarkRed">
+                    <Border.Visibility>
+                        <MultiBinding Converter="{StaticResource MBTVHC}">
+                            <Binding Path="Selectable" />
+                            <Binding Path="IsSelected" RelativeSource="{RelativeSource AncestorType={x:Type ListBoxItem}}" />
+                        </MultiBinding>
+                    </Border.Visibility>
+                </Border>
+                        <!--Visibility="{
                             Binding Path=IsSelected
                             , RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}
                             , Converter={StaticResource BTVHC}}"
-                        />
+                        />-->
                 <Image Grid.Column="2"
                        Source="{Binding Path=Icon}" />
                 <TextBlock Grid.Column="3"
@@ -83,7 +91,8 @@
                  ItemsSource="{Binding Source={StaticResource Navigation.Items.Static}}"
                  ItemTemplate="{StaticResource NavigationItemTemplate}" />
         
-        <ScrollViewer Grid.Row="1">
+        <ScrollViewer Grid.Row="1"
+                      VerticalScrollBarVisibility="Auto">
             <ListBox ItemsSource="{Binding Source={StaticResource Navigation.Items.Dynamic}}"
                      ItemTemplate="{StaticResource NavigationItemTemplate}"
                      ItemContainerStyle="{StaticResource ItemSelectionAwareListBoxItemStyle}" />

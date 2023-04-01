@@ -74,19 +74,7 @@ namespace Prismo.Modules.Navigation.Models
             }
         }
 
-        private bool _selectable;
-        public bool Selectable
-        {
-            get { return _selectable; }
-            set
-            {
-                if (value != _selectable)
-                {
-                    _selectable = value;
-                    SetProperty(ref _selectable, value);
-                }
-            }
-        }
+        public bool Selectable { get; set; }
 
         private bool _isSelected;
         public bool IsSelected
@@ -94,8 +82,11 @@ namespace Prismo.Modules.Navigation.Models
             get { return _isSelected; }
             set
             {
-                _isSelected = value;
-                SetProperty(ref _isSelected, value);
+                if (Selectable &&  _isSelected != value)
+                {
+                    _isSelected = value;
+                    SetProperty(ref _isSelected, value);
+                }
             }
         }
     }
