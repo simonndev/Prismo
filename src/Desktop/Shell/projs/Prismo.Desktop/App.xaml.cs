@@ -27,7 +27,8 @@ namespace Prismo
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
-            moduleCatalog.AddModule<Modules.Rx.RxModule>();
+            moduleCatalog.AddModule<Modules.Navigation.NavigationModule>();
+            //moduleCatalog.AddModule<Modules.Rx.RxModule>();
         }
     }
 }

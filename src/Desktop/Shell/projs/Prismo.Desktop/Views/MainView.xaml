@@ -10,7 +10,8 @@
         mc:Ignorable="d"
         Title="Prismo" Height="450" Width="800">
     <Window.Resources>
-        <!-- LL: Resources' ordering matters -->
+        <!-- TODO: Could use a control rather than a datatemplate -->
+        <!-- LL: Resources' ordering matters -->               
         <DataTemplate x:Key="Dashboard" DataType="{x:Type vm:DashboardViewModel}">
             <Grid>
                 <TextBlock Text="Dashboard" />
@@ -20,7 +21,7 @@
         <DataTemplate x:Key="MainContentTemplate">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition MinWidth="200" Width="Auto" />
                     <ColumnDefinition Width="6" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
