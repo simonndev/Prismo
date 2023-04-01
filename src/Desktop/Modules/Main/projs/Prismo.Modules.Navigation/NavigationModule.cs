@@ -1,7 +1,9 @@
+using Prism.Events;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
 using Prismo.Presentation;
+using Prismo.Presentation.Events;
 using System;
 
 namespace Prismo.Modules.Navigation
@@ -16,6 +18,7 @@ namespace Prismo.Modules.Navigation
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            
         }
     }
 }

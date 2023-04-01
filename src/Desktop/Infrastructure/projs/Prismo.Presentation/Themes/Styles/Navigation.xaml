@@ -1,0 +1,64 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:models="clr-namespace:Prismo.Presentation.Models"
+                    xmlns:converters="clr-namespace:Prismo.Presentation.Converters">
+
+    <converters:BooleanToVisibilityHiddenConverter x:Key="BTVHC" />
+    <converters:MultiBoolToVisibilityHiddenConverter x:Key="MBTVHC" />
+
+    <DataTemplate x:Key="NavigationItemInputTemplate">
+        <Grid>
+            <TextBox HorizontalAlignment="Stretch"
+                     Text="{Binding Path=InputText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="NavigationItemDefaultTemplate">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3" />
+                <ColumnDefinition Width="6" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Border Background="DarkRed">
+                <Border.Visibility>
+                    <MultiBinding Converter="{StaticResource MBTVHC}">
+                        <Binding Path="Selectable" />
+                        <Binding Path="IsSelected" RelativeSource="{RelativeSource AncestorType={x:Type ListBoxItem}}" />
+                    </MultiBinding>
+                </Border.Visibility>
+            </Border>
+            <Image Grid.Column="2"
+                   Source="{Binding Path=Icon}" />
+            <TextBlock Grid.Column="3"
+                       Text="{Binding Path=Heading}" />
+        </Grid>
+    </DataTemplate>
+
+    <!-- Switch the content of the ListBoxItem bound to the underlying model's enum property -->
+    <DataTemplate x:Key="NavigationItemTemplate"
+                  DataType="{x:Type models:NavigationItemModel}">
+        <ContentControl Content="{Binding}">
+            <ContentControl.Style>
+                <Style TargetType="{x:Type ContentControl}">
+                    <Setter Property="ContentTemplate"
+                            Value="{StaticResource NavigationItemDefaultTemplate}" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=Kind}"
+                                     Value="{x:Static models:NavKind.Input}">
+                            <Setter Property="ContentTemplate"
+                                    Value="{StaticResource NavigationItemInputTemplate}" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ContentControl.Style>
+        </ContentControl>
+    </DataTemplate>
+
+    <Style x:Key="ItemSelectionAwareListBoxItemStyle"
+           TargetType="{x:Type ListBoxItem}">
+        <Setter Property="IsSelected"
+                Value="{Binding Path=IsSelected, Mode=TwoWay}" />
+    </Style>
+</ResourceDictionary>

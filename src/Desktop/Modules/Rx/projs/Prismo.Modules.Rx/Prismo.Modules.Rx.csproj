@@ -14,8 +14,4 @@
     <ProjectReference Include="..\..\..\..\Infrastructure\projs\Prismo.Presentation\Prismo.Presentation.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
-
 </Project>

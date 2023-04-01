@@ -1,7 +1,10 @@
+using Prism.Events;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
+using Prismo.Modules.Rx.Services;
 using Prismo.Presentation;
+using Prismo.Presentation.Events;
 using System;
 
 namespace Prismo.Modules.Rx
@@ -10,13 +13,13 @@ namespace Prismo.Modules.Rx
     {
         public void OnInitialized(IContainerProvider containerProvider)
         {
-            IRegionManager rm = containerProvider.Resolve<IRegionManager>();
-            rm.RegisterViewWithRegion<Views.NavigationView>(RegionNames.LeftContentRegion);
-            rm.RegisterViewWithRegion<Views.MainView>(RegionNames.MainContentRegion);
+            var rm = containerProvider.Resolve<IRegionManager>();
+            rm.RegisterViewWithRegion<Views.NavigationView>(RegionNames.NavigationRegion);
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterSingleton<INavigationItemsProvider>(container => container.Resolve<NavigationItemsProvider>());
         }
     }
 }
