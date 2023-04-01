@@ -61,7 +61,6 @@ namespace Prismo.Modules.Navigation.Models
         public string? SubHeading { get; set; }
 
         private string? _inputText;
-
         public string? InputText
         {
             get { return _inputText; }
@@ -72,6 +71,31 @@ namespace Prismo.Modules.Navigation.Models
                     _inputText = value;
                     SetProperty(ref _inputText, value);
                 }
+            }
+        }
+
+        private bool _selectable;
+        public bool Selectable
+        {
+            get { return _selectable; }
+            set
+            {
+                if (value != _selectable)
+                {
+                    _selectable = value;
+                    SetProperty(ref _selectable, value);
+                }
+            }
+        }
+
+        private bool _isSelected;
+        public bool IsSelected
+        {
+            get { return _isSelected; }
+            set
+            {
+                _isSelected = value;
+                SetProperty(ref _isSelected, value);
             }
         }
     }
