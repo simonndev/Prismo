@@ -10,8 +10,9 @@
         mc:Ignorable="d"
         Title="Prismo" Height="450" Width="800">
     <Window.Resources>
-        <!-- LL: Resources' ordering matters -->
-        <DataTemplate x:Key="Dashboard" DataType="{x:Type vm:DashboardViewModel}">
+        <!-- TODO: Could use a control rather than a datatemplate -->
+        <!-- LL: Resources' ordering matters -->               
+        <DataTemplate x:Key="DashboardTemplate" DataType="{x:Type vm:DashboardViewModel}">
             <Grid>
                 <TextBlock Text="Dashboard" />
             </Grid>
@@ -20,24 +21,39 @@
         <DataTemplate x:Key="MainContentTemplate">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition MinWidth="200" Width="Auto" />
                     <ColumnDefinition Width="6" />
+                    <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
                 <ContentControl prism:RegionManager.RegionName="{x:Static presentation:RegionNames.LeftContentRegion}" />
                 <ContentControl Grid.Column="2"
                                 prism:RegionManager.RegionName="{x:Static presentation:RegionNames.MainContentRegion}" />
+                
+                <!-- Hold the content of a navigation item from the sub module -->
+                <!-- As this is not a Prism region, we have to set it manually in code behind -->
+                <ContentControl x:Name="DynamicContentHolder"
+                                Grid.Column="3" />
             </Grid>
         </DataTemplate>
         
         <!-- LL: the DataTemplate should be pre-defined -->
         <Style x:Key="ContentContainerStyle" TargetType="{x:Type ContentControl}">
             <Setter Property="ContentTemplate" Value="{StaticResource MainContentTemplate}" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=CurrentView}" Value="{x:Static vm:ShellViewSwitchModes.Content}">
+                    <Setter Property="ContentTemplate" Value="{StaticResource MainContentTemplate}" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=CurrentView}" Value="{x:Static vm:ShellViewSwitchModes.Dashboard}">
+                    <Setter Property="ContentTemplate" Value="{StaticResource DashboardTemplate}" />
+                </DataTrigger>
+            </Style.Triggers>
         </Style>
     </Window.Resources>
     <Grid>
-        <ContentControl Content="{Binding}"
+        <ContentControl x:Name="MainContentHolder"
+                        Content="{Binding}"
                         Style="{StaticResource ContentContainerStyle}" />
     </Grid>
 </Window>

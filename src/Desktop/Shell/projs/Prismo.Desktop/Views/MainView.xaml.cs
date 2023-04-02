@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Prism.Regions;
+using Prismo.Presentation;
+using Prismo.Presentation.Helper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +23,34 @@ namespace Prismo.Views
     /// </summary>
     public partial class MainView : Window
     {
-        public MainView()
+        private readonly IRegionManager _regionManager;
+
+        public MainView(IRegionManager regionManager)
         {
+            _regionManager = regionManager;
+
             InitializeComponent();
+
+            Loaded += (s, e) =>
+            {
+                // As the visual object we want to find is defined in a ContentTemplate, so
+                // 1. Find the ContentPresenter
+                ContentPresenter? contentPresenter = UIElementFinder.FindVisualChild<ContentPresenter>(MainContentHolder);
+                if (contentPresenter is not null)
+                {
+                    DataTemplate template = contentPresenter.ContentTemplate;
+
+                    // 2. Find the ContentControl that hosts the navigation content view by its name.
+                    ContentControl? holder = (ContentControl)template.FindName("DynamicContentHolder", contentPresenter);
+                    if (holder is not null)
+                    {
+                        // 3. Register it as a Region
+                        RegionManager.SetRegionManager(holder, _regionManager);
+                        RegionManager.SetRegionName(holder, RegionNames.DynamicContentRegion);
+                    }
+                }
+            };
         }
+
     }
 }
