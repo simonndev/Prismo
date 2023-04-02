@@ -18,9 +18,9 @@ namespace Prismo.Modules.Rx.Views
     /// <summary>
     /// Interaction logic for NavigationView.xaml
     /// </summary>
-    public partial class NavigationView : UserControl
+    public partial class StaticNavigationView : UserControl
     {
-        public NavigationView()
+        public StaticNavigationView()
         {
             InitializeComponent();
         }

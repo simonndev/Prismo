@@ -1,6 +1,8 @@
 ﻿using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Unity;
+using Prismo.Modules.Navigation;
+using Prismo.Modules.Rx;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -27,7 +29,8 @@ namespace Prismo
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
-            moduleCatalog.AddModule<Modules.Rx.RxModule>();
+            moduleCatalog.AddModule<NavigationModule>(nameof(NavigationModule));
+            moduleCatalog.AddModule<RxModule>(nameof(RxModule), InitializationMode.WhenAvailable, nameof(NavigationModule));
         }
     }
 }
