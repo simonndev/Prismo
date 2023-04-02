@@ -14,13 +14,18 @@ namespace Prismo.Modules.Rx
         public void OnInitialized(IContainerProvider containerProvider)
         {
             var rm = containerProvider.Resolve<IRegionManager>();
-            rm.RegisterViewWithRegion<Views.NavigationView>(RegionNames.NavigationRegion);
-            rm.RegisterViewWithRegion<Views.DownloadExNavigationItemView>(RegionNames.DynamicNavigationRegion);
+            rm.RegisterViewWithRegion<Views.StaticNavigationView>(RegionNames.NavigationRegion);
+            rm.RegisterViewWithRegion<Views.DownloadImagesNavigationItemView>(RegionNames.DynamicNavigationRegion);
+
+            
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterSingleton<INavigationItemsProvider>(container => container.Resolve<NavigationItemsProvider>());
+
+            // Register the view's instance
+            containerRegistry.RegisterInstance(typeof(Views.DownloadImagesContentView), new Views.DownloadImagesContentView());
         }
     }
 }

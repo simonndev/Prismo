@@ -1,5 +1,7 @@
-﻿using Prism.Commands;
+﻿using Prism;
+using Prism.Commands;
 using Prism.Events;
+using Prism.Regions;
 using Prismo.Presentation.Events;
 using Prismo.Presentation.Models;
 using System;

@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Prismo.Modules.Rx.Views
 {
     /// <summary>
-    /// Interaction logic for DownloadExNavigationView.xaml
+    /// Interaction logic for NavigationView.xaml
     /// </summary>
-    public partial class DownloadExNavigationItemView : ListBoxItem
+    public partial class StaticNavigationView : UserControl
     {
-        public DownloadExNavigationItemView()
+        public StaticNavigationView()
         {
             InitializeComponent();
         }

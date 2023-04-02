@@ -1,10 +1,16 @@
-﻿using Prismo.Presentation.Models;
+﻿using Prism.Regions;
+using Prismo.Presentation.Models;
 using System.Collections.ObjectModel;
 
 namespace Prismo.Modules.Rx.ViewModels
 {
-    public class NavigationViewModel
+    public class StaticNavigationViewModel
     {
+        public StaticNavigationViewModel(IRegionManager regionManager)
+        {
+            
+        }
+
         public ObservableCollection<NavigationItemModel> NavigationItems { get; private set; } = new()
         {
             new NavigationItemModel { Icon = NavIcons.Home, Kind = NavKind.Default, Selectable = true, Heading = "General" },

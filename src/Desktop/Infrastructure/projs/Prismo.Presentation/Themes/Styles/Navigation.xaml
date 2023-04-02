@@ -5,6 +5,17 @@
 
     <converters:BooleanToVisibilityHiddenConverter x:Key="BTVHC" />
     <converters:MultiBoolToVisibilityHiddenConverter x:Key="MBTVHC" />
+    <converters:EmptyStringToVisibilityCollapsedConverter x:Key="ES2VCC" />
+
+    <Style x:Key="NavigationItemHeadingStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+
+    <Style x:Key="NavigationItemSubHeadingStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontSize" Value="10" />
+        <Setter Property="TextWrapping" Value="WrapWithOverflow" />
+    </Style>
 
     <DataTemplate x:Key="NavigationItemInputTemplate">
         <Grid>
@@ -31,8 +42,14 @@
             </Border>
             <Image Grid.Column="2"
                    Source="{Binding Path=Icon}" />
-            <TextBlock Grid.Column="3"
-                       Text="{Binding Path=Heading}" />
+            <StackPanel Grid.Column="3">
+                <TextBlock Text="{Binding Path=Heading}"
+                           Style="{StaticResource NavigationItemHeadingStyle}" />
+                <TextBlock Text="{Binding Path=SubHeading}"
+                           Visibility="{Binding Path=SubHeading, Converter={StaticResource ES2VCC}}"
+                           Style="{StaticResource NavigationItemSubHeadingStyle}"/>
+            </StackPanel>
+            
         </Grid>
     </DataTemplate>
 

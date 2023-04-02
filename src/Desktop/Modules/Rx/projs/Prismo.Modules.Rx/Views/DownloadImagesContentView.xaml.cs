@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -16,11 +17,11 @@ using System.Windows.Shapes;
 namespace Prismo.Modules.Rx.Views
 {
     /// <summary>
-    /// Interaction logic for NavigationView.xaml
+    /// Interaction logic for DownloadImagesView.xaml
     /// </summary>
-    public partial class NavigationView : UserControl
+    public partial class DownloadImagesContentView : UserControl
     {
-        public NavigationView()
+        public DownloadImagesContentView()
         {
             InitializeComponent();
         }
