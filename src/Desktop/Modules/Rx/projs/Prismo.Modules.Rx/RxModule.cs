@@ -15,6 +15,7 @@ namespace Prismo.Modules.Rx
         {
             var rm = containerProvider.Resolve<IRegionManager>();
             rm.RegisterViewWithRegion<Views.NavigationView>(RegionNames.NavigationRegion);
+            rm.RegisterViewWithRegion<Views.DownloadExNavigationItemView>(RegionNames.DynamicNavigationRegion);
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
