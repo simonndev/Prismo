@@ -8,7 +8,55 @@
              xmlns:local="clr-namespace:Prismo.Modules.Rx.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ItemsPanelTemplate x:Key="UniformGridDefaultColumn3">
+            <UniformGrid Columns="3" />
+        </ItemsPanelTemplate>
+
+        <DataTemplate x:Key="ImageItemTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="6" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Image Width="72"
+                       Height="72"
+                       Source="{Binding Path=Image}" />
+
+                <StackPanel Grid.Column="2">
+                    <TextBlock Text="{Binding Path=Url}" TextWrapping="WrapWithOverflow" />
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+
+        <Style x:Key="VirtualizedListView" TargetType="{x:Type ListView}">
+            <Setter Property="VirtualizingStackPanel.IsVirtualizing" Value="True"/>
+            <Setter Property="VirtualizingStackPanel.VirtualizationMode" Value="Recycling"/>
+            <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="True"/>
+            <Setter Property="ListView.ItemsSource" Value="{Binding}"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=IsLoading}" Value="True">
+                    <Setter Property="ListView.Cursor" Value="Wait"/>
+                    <Setter Property="ListView.Background" Value="LightGray"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
     <Grid>
-        <TextBlock Text="{Binding Path=Heading}" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="12" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Button Command="{Binding Path=DownloadUrlsCommand}">Download</Button>
+        
+        <ListView Grid.Row="2"
+                  ItemsSource="{Binding Path=ImageCollection}"
+                  ItemTemplate="{StaticResource ImageItemTemplate}"
+                  Style="{StaticResource VirtualizedListView}">
+        </ListView>
     </Grid>
 </UserControl>

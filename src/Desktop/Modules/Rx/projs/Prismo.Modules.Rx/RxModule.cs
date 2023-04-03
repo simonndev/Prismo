@@ -6,6 +6,8 @@ using Prismo.Modules.Rx.Services;
 using Prismo.Presentation;
 using Prismo.Presentation.Events;
 using System;
+using System.ComponentModel;
+using System.Net.Http;
 
 namespace Prismo.Modules.Rx
 {
@@ -22,6 +24,9 @@ namespace Prismo.Modules.Rx
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterInstance(new HttpClient(), "ImageDownloaderHttpClient");
+            containerRegistry.RegisterSingleton<ImageDownloader>(container => new ImageDownloader(container.Resolve<HttpClient>("ImageDownloaderHttpClient")));
+
             containerRegistry.RegisterSingleton<INavigationItemsProvider>(container => container.Resolve<NavigationItemsProvider>());
 
             // Register the view's instance
