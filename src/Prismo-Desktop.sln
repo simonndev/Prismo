@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prismo.Presentation", "Desk
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Main", "Main", "{096FAD94-013B-4C81-B535-010484E08978}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prismo.Modules.Navigation", "Desktop\Modules\Main\projs\Prismo.Modules.Navigation\Prismo.Modules.Navigation.csproj", "{F85D4D32-AC62-4BF9-9E8D-C4C9AD06FFC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prismo.Modules.Navigation", "Desktop\Modules\Main\projs\Prismo.Modules.Navigation\Prismo.Modules.Navigation.csproj", "{F85D4D32-AC62-4BF9-9E8D-C4C9AD06FFC9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
