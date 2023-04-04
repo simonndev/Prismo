@@ -9,11 +9,18 @@
              xmlns:converters="clr-namespace:Prismo.Presentation.Converters;assembly=Prismo.Presentation"
              xmlns:models="clr-namespace:Prismo.Presentation.Models;assembly=Prismo.Presentation"
              xmlns:local="clr-namespace:Prismo.Modules.Navigation.Views"
+             xmlns:behaviors="clr-namespace:Prismo.Presentation.Behaviors;assembly=Prismo.Presentation"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <CollectionViewSource x:Key="Navigation-Items-Static"
                               Source="{Binding Path=StaticItems}" />
+
+        <Style x:Key="ListBoxGroupByModuleNameStyle" TargetType="{x:Type ListBox}">
+            <Setter Property="behaviors:NavigationBarGroupingBehavior.GroupBy" Value="ModuleName" />
+            <Setter Property="behaviors:NavigationBarGroupingBehavior.GroupingEnabled" Value="True" />
+        </Style>
+               
     </UserControl.Resources>
         
     <Grid>
@@ -47,8 +54,19 @@
         <ScrollViewer Grid.Row="2"
                       VerticalScrollBarVisibility="Auto">
             <ListBox prism:RegionManager.RegionName="{x:Static presentation:RegionNames.DynamicNavigationRegion}"
+                     Style="{StaticResource ListBoxGroupByModuleNameStyle}"
                      ItemTemplate="{DynamicResource NavigationItemTemplate}"
-                     ItemContainerStyle="{DynamicResource ItemSelectionAwareListBoxItemStyle}" />
+                     ItemContainerStyle="{DynamicResource ItemSelectionAwareListBoxItemStyle}">
+                <ListBox.GroupStyle>
+                    <GroupStyle>
+                        <GroupStyle.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </GroupStyle.HeaderTemplate>
+                    </GroupStyle>
+                </ListBox.GroupStyle>
+            </ListBox>
         </ScrollViewer>
     </Grid>
 </UserControl>

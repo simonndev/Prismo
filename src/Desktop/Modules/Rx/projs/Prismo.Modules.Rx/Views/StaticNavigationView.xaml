@@ -4,7 +4,8 @@
              xmlns:prism="http://prismlibrary.com/"
                 prism:ViewModelLocator.AutoWireViewModel="True"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:behaviors="clr-namespace:Prismo.Presentation.Behaviors;assembly=Prismo.Presentation"
              xmlns:local="clr-namespace:Prismo.Modules.Rx.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -13,8 +14,21 @@
                               Source="{Binding Path=NavigationItems}" />
     </UserControl.Resources>
     <Grid>
-        <ListBox ItemsSource="{Binding Source={StaticResource Navigation-Items}}"
+        <ListBox behaviors:NavigationBarGroupingBehavior.GroupBy="ModuleName"
+                 behaviors:NavigationBarGroupingBehavior.GroupingEnabled="True"
+                 ItemsSource="{Binding Source={StaticResource Navigation-Items}}"
                  ItemTemplate="{DynamicResource NavigationItemTemplate}"
-                 ItemContainerStyle="{DynamicResource ItemSelectionAwareListBoxItemStyle}" />
+                 ItemContainerStyle="{DynamicResource ItemSelectionAwareListBoxItemStyle}">
+            <ListBox.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ListBox.GroupStyle>
+
+        </ListBox>
     </Grid>
 </UserControl>

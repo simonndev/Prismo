@@ -66,6 +66,7 @@ namespace Prismo.Presentation.Models
             }
         }
 
+        public string? ModuleName { get; set; }
         public string? Heading { get; set; }
         public string? SubHeading { get; set; }
 

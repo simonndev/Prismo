@@ -18,6 +18,7 @@ namespace Prismo.Modules.Rx.ViewModels
             this.Selectable = true;
             this.Kind = NavKind.Default;
             this.Icon = NavIcons.Default;
+            this.ModuleName = "Rx";
             this.Heading = "Rx - Download Images";
             this.SubHeading = "Provide a list of image URLs, download and load them onto UI";
         }
