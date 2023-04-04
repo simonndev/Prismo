@@ -33,5 +33,12 @@ namespace Prismo.Modules.Rx.Services
                 )
             );
         }
+
+        public IObservable<byte[]> DownloadImageBytesObservable(string url)
+        {
+            return ObservableMixin.UsingAsync(
+                () => _httpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead)
+                , response => Observable.FromAsync(() => response.Content.ReadAsByteArrayAsync()));
+        }
     }
 }

@@ -20,7 +20,7 @@ namespace Prismo.Modules.Rx.ViewModels
         {
             _imageDownloader = imageDownloader ?? throw new ArgumentNullException(nameof(imageDownloader));
 
-            DownloadUrlsCommand= new DelegateCommand(DownloadUrls);
+            DownloadUrlsCommand = new DelegateCommand(DownloadUrls);
         }
 
         private bool _isLoading;
@@ -66,24 +66,43 @@ namespace Prismo.Modules.Rx.ViewModels
             };
 
             var images = imageUrls.Select(url => new ImageModel { Url = url });
-            foreach (var image in images)
-            {
-                ImageCollection.Add(image);
-            }
-            var obs = (from img in images.ToObservable()
-                       from ms in _imageDownloader.DownloadImageStreamObservable(img.Url)
-                           .ObserveOn(CurrentThreadScheduler.Instance)
-                           .Do(ms =>
-                           {
-                               Application.Current.Dispatcher.InvokeAsync(() =>
-                               {
-                                   img.SetImage(ms, 72, 72);
-                               });
-                           })
-                       select img).Subscribe();
+
+            SubscribeBytes(images)
+                .ObserveOn(TaskPoolScheduler.Default)
+                .Subscribe(img => LoadImage(img), () => IsLoading = false); ;
         }
 
-        private void SubscribeImage(ImageModel image)
+        private IObservable<ImageModel> SubscribeStream(IEnumerable<ImageModel> images)
+        {
+            return from image in images.ToObservable()
+                   from ms in _imageDownloader.DownloadImageStreamObservable(image.Url)
+                   .ObserveOn(TaskPoolScheduler.Default)
+                   .Do(ms =>
+                   {
+                       Application.Current.Dispatcher.InvokeAsync(() =>
+                       {
+                           image.LoadImageFromStream(ms, 72, 72);
+                       });
+                   })
+                   select image;
+        }
+
+        private IObservable<ImageModel> SubscribeBytes(IEnumerable<ImageModel> images)
+        {
+            return from image in images.ToObservable()
+                   from bytes in _imageDownloader.DownloadImageBytesObservable(image.Url)
+                   .ObserveOn(TaskPoolScheduler.Default)
+                   .Do(bytes =>
+                   {
+                       Application.Current.Dispatcher.InvokeAsync(() =>
+                       {
+                           image.LoadImageFromBytes(bytes, 72, 72);
+                       });
+                   })
+                   select image;
+        }
+
+        private void LoadImage(ImageModel image)
         {
             // Orders are messed up
             Application.Current.Dispatcher.InvokeAsync(() =>
