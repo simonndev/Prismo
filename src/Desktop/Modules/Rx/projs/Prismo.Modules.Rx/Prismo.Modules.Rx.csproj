@@ -7,16 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="NewFolder\**" />
+    <EmbeddedResource Remove="NewFolder\**" />
+    <None Remove="NewFolder\**" />
+    <Page Remove="NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Prism.Wpf" Version="8.1.97" />
     <PackageReference Include="System.Reactive" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Infrastructure\projs\Prismo.Presentation\Prismo.Presentation.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="NewFolder\" />
   </ItemGroup>
 
 </Project>
