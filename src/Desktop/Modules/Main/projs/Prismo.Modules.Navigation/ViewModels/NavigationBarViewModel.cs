@@ -16,8 +16,17 @@ namespace Prismo.Modules.Navigation.ViewModels
 {
     public class NavigationBarViewModel
     {
-        public NavigationBarViewModel()
+        private readonly IEventAggregator _eventAggregator;
+
+        public NavigationBarViewModel(IEventAggregator eventAggregator)
         {
+            eventAggregator.GetEvent<FetchModuleNavigationItemsEvent>().Subscribe(items =>
+            {
+                foreach (var item in items)
+                {
+                    StaticItems.Add(item);
+                }
+            }, ThreadOption.UIThread);
         }
 
         public ObservableCollection<NavigationItemModel> StaticItems { get; private set; } = new()
@@ -25,6 +34,8 @@ namespace Prismo.Modules.Navigation.ViewModels
             new NavigationItemModel { Icon = NavIcons.Home, Kind = NavKind.Default, Heading = "Home", Selectable = false},
             new NavigationItemModel { Kind = NavKind.Input, Selectable = false }
         };
+
+        public ObservableCollection<NavigationItemModel> DynamicItems { get; private set; } = new();
 
         public ICommand NavigateHomeCommand { get; private set; } = new DelegateCommand(() => { });
     }

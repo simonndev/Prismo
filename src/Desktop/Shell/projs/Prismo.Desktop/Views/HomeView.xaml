@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="Prismo.Views.HomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:behaviors="clr-namespace:Prismo.Presentation.Behaviors;assembly=Prismo.Presentation"
+             xmlns:local="clr-namespace:Prismo.Views">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <ScrollViewer Grid.Row="1"
+                      VerticalScrollBarVisibility="Auto">
+            <ListBox x:Name="LoadedModulesListBox">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid>
+                            <i:Interaction.Behaviors>
+                                <behaviors:ResponsiveUniformGridBehavior />
+                            </i:Interaction.Behaviors>
+                        </UniformGrid>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+
+                <ListBoxItem>
+                    <Button Command="{Binding Path=OpenModuleCommand}">Module A</Button>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Command="{Binding Path=OpenModuleCommand}">Module B</Button>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Command="{Binding Path=OpenModuleCommand}">Module C</Button>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Command="{Binding Path=OpenModuleCommand}">Module D</Button>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Command="{Binding Path=OpenModuleCommand}">Module E</Button>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Command="{Binding Path=OpenModuleCommand}">Module F</Button>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Command="{Binding Path=OpenModuleCommand}">Module G</Button>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Command="{Binding Path=OpenModuleCommand}">Module H</Button>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Command="{Binding Path=OpenModuleCommand}">Module I</Button>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Command="{Binding Path=OpenModuleCommand}">Module J</Button>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Command="{Binding Path=OpenModuleCommand}">Module K</Button>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Command="{Binding Path=OpenModuleCommand}">Module L</Button>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Command="{Binding Path=OpenModuleCommand}">Module M</Button>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Command="{Binding Path=OpenModuleCommand}">Module N</Button>
+                </ListBoxItem>
+            </ListBox>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

@@ -6,7 +6,7 @@ using System.Windows.Controls;
 namespace Prismo.Modules.Rx.Views
 {
     /// <summary>
-    /// Interaction logic for DownloadExNavigationView.xaml
+    /// Interaction logic for DownloadImagesNavigationItemView.xaml
     /// </summary>
     public partial class DownloadImagesNavigationItemView : ListBoxItem
     {
@@ -23,8 +23,10 @@ namespace Prismo.Modules.Rx.Views
             if (regionManager.Regions.ContainsRegionWithName(RegionNames.DynamicContentRegion))
             {
                 region = regionManager.Regions[RegionNames.DynamicContentRegion];
-                region.Add(contentView);
-                region.Deactivate(contentView);
+                if (!region.ActiveViews.Contains(contentView))
+                {
+                    region.Add(contentView);
+                }
             }
 
             if (DataContext is ViewModels.DownloadImagesNavigationItemViewModel vm)
@@ -33,13 +35,7 @@ namespace Prismo.Modules.Rx.Views
                 {
                     if (region != null)
                     {
-                        if (!region.ActiveViews.Contains(contentView))
-                        {
-                            if (region.Views.Contains(contentView))
-                            {
-                                region.Activate(contentView);
-                            }
-                        }
+                        region.Activate(contentView);
                     }
                 };
             }

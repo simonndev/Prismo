@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="Prismo.Views.ContentView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:presentation="clr-namespace:Prismo.Presentation;assembly=Prismo.Presentation"
+             xmlns:local="clr-namespace:Prismo.Views"
+             
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MinWidth="200" Width="Auto" />
+            <ColumnDefinition Width="6" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <ContentControl prism:RegionManager.RegionName="{x:Static presentation:RegionNames.LeftContentRegion}" />
+        <ContentControl Grid.Column="2"
+                        prism:RegionManager.RegionName="{x:Static presentation:RegionNames.MainContentRegion}" />
+
+        <!-- Hold the content of a navigation item from the sub module -->
+        <!-- As this is not a Prism region, we have to set it manually in code behind -->
+        <ScrollViewer Grid.Column="3"
+                      VerticalScrollBarVisibility="Auto">
+            <!-- We going to add many dynamic contents into this region -->
+            <ItemsControl x:Name="DynamicContentHolder" />
+        </ScrollViewer>
+    </Grid>
+</UserControl>

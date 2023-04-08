@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Prismo.Views
+namespace Prismo.Modules.Rx.Views
 {
     /// <summary>
-    /// Interaction logic for ContentPartialView.xaml
+    /// Interaction logic for DownloadImageContentView.xaml
     /// </summary>
-    public partial class ContentPartialView : UserControl
+    public partial class DownloadImageContentView : UserControl
     {
-        public ContentPartialView()
+        public DownloadImageContentView()
         {
             InitializeComponent();
         }
