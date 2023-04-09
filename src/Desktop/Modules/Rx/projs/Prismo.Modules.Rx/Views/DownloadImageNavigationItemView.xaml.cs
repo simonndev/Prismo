@@ -30,31 +30,28 @@ namespace Prismo.Modules.Rx.Views
             var regionManager = containerProvider.Resolve<IRegionManager>();
 
             // Adds the content view for this navigation item; only activates it when user clicks to select.
-            var contentView = containerProvider.Resolve<DownloadImageContentView>();
+
             IRegion? region = null;
 
             if (regionManager.Regions.ContainsRegionWithName(RegionNames.DynamicContentRegion))
             {
                 region = regionManager.Regions[RegionNames.DynamicContentRegion];
-                if (!region.ActiveViews.Contains(contentView))
+                var contentView = region.GetView(nameof(DownloadImageContentView));
+                if (contentView is null)
                 {
-                    region.Add(contentView);
+                    contentView = containerProvider.Resolve<DownloadImageContentView>();
+                    region.Add(contentView, nameof(DownloadImageContentView));
                 }
             }
 
-            if (DataContext is ViewModels.DownloadImagesNavigationItemViewModel vm)
+            if (DataContext is ViewModels.DownloadImageNavigationItemViewModel vm)
             {
                 vm.ItemSelected += (s, e) =>
                 {
                     if (region != null)
                     {
-                        if (!region.ActiveViews.Contains(contentView))
-                        {
-                            if (region.Views.Contains(contentView))
-                            {
-                                region.Activate(contentView);
-                            }
-                        }
+                        var contentView = region.GetView(nameof(DownloadImageContentView));
+                        region.Activate(contentView);
                     }
                 };
             }

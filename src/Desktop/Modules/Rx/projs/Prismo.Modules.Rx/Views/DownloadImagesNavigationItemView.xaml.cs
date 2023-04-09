@@ -17,15 +17,17 @@ namespace Prismo.Modules.Rx.Views
             InitializeComponent();
 
             // Adds the content view for this navigation item; only activates it when user clicks to select.
-            var contentView = containerProvider.Resolve<DownloadImagesContentView>();
+
             IRegion? region = null;
 
             if (regionManager.Regions.ContainsRegionWithName(RegionNames.DynamicContentRegion))
             {
                 region = regionManager.Regions[RegionNames.DynamicContentRegion];
-                if (!region.ActiveViews.Contains(contentView))
+                var contentView = region.GetView(nameof(DownloadImagesContentView));
+                if (contentView is null)
                 {
-                    region.Add(contentView);
+                    contentView = containerProvider.Resolve<DownloadImagesContentView>();
+                    region.Add(contentView, nameof(DownloadImagesContentView));
                 }
             }
 
@@ -35,6 +37,7 @@ namespace Prismo.Modules.Rx.Views
                 {
                     if (region != null)
                     {
+                        var contentView = region.GetView(nameof(DownloadImagesContentView));
                         region.Activate(contentView);
                     }
                 };

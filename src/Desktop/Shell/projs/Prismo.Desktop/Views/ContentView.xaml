@@ -26,7 +26,7 @@
         <ScrollViewer Grid.Column="3"
                       VerticalScrollBarVisibility="Auto">
             <!-- We going to add many dynamic contents into this region -->
-            <ItemsControl x:Name="DynamicContentHolder" />
+            <ContentControl x:Name="DynamicContentHolder" />
         </ScrollViewer>
     </Grid>
 </UserControl>

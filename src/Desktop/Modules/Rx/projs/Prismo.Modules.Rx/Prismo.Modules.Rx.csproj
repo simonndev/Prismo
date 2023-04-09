@@ -15,8 +15,4 @@
     <ProjectReference Include="..\..\..\..\Infrastructure\projs\Prismo.Presentation\Prismo.Presentation.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="NewFolder\" />
-  </ItemGroup>
-
 </Project>

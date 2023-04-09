@@ -46,7 +46,7 @@ namespace Prismo.Views
                 var grid = (Grid)contentView.Content;
 
                 // grid.FindChild("DynamicContentHolder") does not work as it is not a visual child
-                ItemsControl? holder = (ItemsControl)grid.FindName("DynamicContentHolder");
+                ContentControl? holder = (ContentControl)grid.FindName("DynamicContentHolder");
 
                 // 3. Register it as a Region
                 RegionManager.SetRegionManager(holder, _regionManager);
