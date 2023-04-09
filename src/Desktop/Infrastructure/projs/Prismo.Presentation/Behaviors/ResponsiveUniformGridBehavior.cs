@@ -32,19 +32,19 @@ namespace Prismo.Presentation.Behaviors
         {
             var uniformGrid = (UniformGrid)sender;
             var width = uniformGrid.ActualWidth;
-            if (width > 1200)
+            if (width > 1350)
             {
                 uniformGrid.Columns = 5;
             }
-            else if (width <= 1200 && width > 960)
+            else if (width <= 1350 && width > 1080)
             {
                 uniformGrid.Columns = 4;
             }
-            else if (width <= 960 && width > 768)
+            else if (width <= 1080 && width > 810)
             {
                 uniformGrid.Columns = 3;
             }
-            else if (width <= 768 && width > 480)
+            else if (width <= 810 && width > 720)
             {
                 uniformGrid.Columns = 2;
             }

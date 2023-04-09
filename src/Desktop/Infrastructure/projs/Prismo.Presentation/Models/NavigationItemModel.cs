@@ -138,7 +138,7 @@ namespace Prismo.Presentation.Models
         {
             if (eventAggregator != null)
             {
-                var payload = new NavigationItemSelectedEventPayload(this,contentView,moduleName);
+                var payload = new NavigationItemSelectedEventPayload(this, contentView, moduleName);
                 eventAggregator.GetEvent<NavigationItemSelectedEvent>().Publish(payload);
             }
         }

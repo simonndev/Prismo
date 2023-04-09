@@ -31,7 +31,7 @@ namespace Prismo.Modules.Navigation.ViewModels
 
         public ObservableCollection<NavigationItemModel> StaticItems { get; private set; } = new()
         {
-            new NavigationItemModel { Icon = NavIcons.Home, Kind = NavKind.Default, Heading = "Home", Selectable = false},
+            new NavigationItemModel { Icon = NavIcons.Home, Kind = NavKind.Default, Heading = "Home"},
             new NavigationItemModel { Kind = NavKind.Input, Selectable = false }
         };
 
