@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace Prismo.ViewModels
 {
-    public class DashboardViewModel : BindableBase
+    public class ContentViewModel : BindableBase
     {
-
     }
 }

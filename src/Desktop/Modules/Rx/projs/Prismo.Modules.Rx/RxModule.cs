@@ -17,9 +17,11 @@ namespace Prismo.Modules.Rx
         {
             var rm = containerProvider.Resolve<IRegionManager>();
             rm.RegisterViewWithRegion<Views.StaticNavigationView>(RegionNames.NavigationRegion);
-            rm.RegisterViewWithRegion<Views.DownloadImagesNavigationItemView>(RegionNames.DynamicNavigationRegion);
 
-            
+            // RegisterViewWithRegion only happens in memory.
+            // In runtime, we have to set the RegionManager for DynamicNavigationRegion in the code behind of ShellView
+            rm.RegisterViewWithRegion<Views.DownloadImageNavigationItemView>(RegionNames.DynamicNavigationRegion);
+            rm.RegisterViewWithRegion<Views.DownloadImagesNavigationItemView>(RegionNames.DynamicNavigationRegion);
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
@@ -31,6 +33,7 @@ namespace Prismo.Modules.Rx
 
             // Register the view's instance
             containerRegistry.RegisterInstance(typeof(Views.DownloadImagesContentView), new Views.DownloadImagesContentView());
+            containerRegistry.RegisterInstance(typeof(Views.DownloadImageContentView), new Views.DownloadImageContentView());
         }
     }
 }

@@ -7,12 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.46" />
     <PackageReference Include="Prism.Wpf" Version="8.1.97" />
-    <PackageReference Include="System.Reactive" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Infrastructure\projs\Prismo.Presentation\Prismo.Presentation.csproj" />
+    <Folder Include="Main\ViewModels\" />
+    <Folder Include="Main\Views\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Infrastructure\projs\Prismo.Presentation\Prismo.Presentation.csproj" />
   </ItemGroup>
 
 </Project>

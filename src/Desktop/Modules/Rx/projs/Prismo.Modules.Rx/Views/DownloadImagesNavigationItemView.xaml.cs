@@ -6,7 +6,7 @@ using System.Windows.Controls;
 namespace Prismo.Modules.Rx.Views
 {
     /// <summary>
-    /// Interaction logic for DownloadExNavigationView.xaml
+    /// Interaction logic for DownloadImagesNavigationItemView.xaml
     /// </summary>
     public partial class DownloadImagesNavigationItemView : ListBoxItem
     {
@@ -17,14 +17,18 @@ namespace Prismo.Modules.Rx.Views
             InitializeComponent();
 
             // Adds the content view for this navigation item; only activates it when user clicks to select.
-            var contentView = containerProvider.Resolve<DownloadImagesContentView>();
+
             IRegion? region = null;
 
             if (regionManager.Regions.ContainsRegionWithName(RegionNames.DynamicContentRegion))
             {
                 region = regionManager.Regions[RegionNames.DynamicContentRegion];
-                region.Add(contentView);
-                region.Deactivate(contentView);
+                var contentView = region.GetView(nameof(DownloadImagesContentView));
+                if (contentView is null)
+                {
+                    contentView = containerProvider.Resolve<DownloadImagesContentView>();
+                    region.Add(contentView, nameof(DownloadImagesContentView));
+                }
             }
 
             if (DataContext is ViewModels.DownloadImagesNavigationItemViewModel vm)
@@ -33,13 +37,8 @@ namespace Prismo.Modules.Rx.Views
                 {
                     if (region != null)
                     {
-                        if (!region.ActiveViews.Contains(contentView))
-                        {
-                            if (region.Views.Contains(contentView))
-                            {
-                                region.Activate(contentView);
-                            }
-                        }
+                        var contentView = region.GetView(nameof(DownloadImagesContentView));
+                        region.Activate(contentView);
                     }
                 };
             }
