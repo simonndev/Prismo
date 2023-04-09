@@ -1,7 +1,6 @@
 ﻿using MahApps.Metro.Controls;
 using Prism.Regions;
 using Prismo.Presentation;
-using Prismo.Presentation.Controls;
 using Prismo.Presentation.Helper;
 using Prismo.ViewModels;
 using System.ComponentModel;

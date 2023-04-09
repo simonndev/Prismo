@@ -36,8 +36,7 @@
         <ListBox HorizontalContentAlignment="Stretch"
                  ItemsSource="{Binding Source={StaticResource StaticNavigationItems}}"
                  ItemTemplate="{DynamicResource NavigationItemTemplate}"
-                 ItemContainerStyle="{DynamicResource ItemSelectionAwareListBoxItemStyle}"
-                 Style="{StaticResource ListBoxGroupByModuleNameStyle}" />
+                 ItemContainerStyle="{DynamicResource ItemSelectionAwareListBoxItemStyle}" />
 
         <ListBox Grid.Row="1"
                  HorizontalContentAlignment="Stretch"
