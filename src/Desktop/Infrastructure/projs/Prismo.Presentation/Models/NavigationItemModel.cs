@@ -27,8 +27,10 @@ namespace Prismo.Presentation.Models
 
     public class NavigationItemModel : BindableBase
     {
-        private NavigationItemModel(string heading, NavKind kind = NavKind.Default, NavIcons icon = NavIcons.Default, string subHeading = null, bool selectable = false)
+        private NavigationItemModel(string? moduleName = null, string? category = null, string? heading = null, string? subHeading = null, NavKind kind = NavKind.Default, NavIcons icon = NavIcons.Default, bool selectable = false)
         {
+            ModuleName = moduleName;
+            Category = category;
             Heading = heading;
             Kind = kind;
             Icon = icon;
@@ -67,6 +69,7 @@ namespace Prismo.Presentation.Models
         }
 
         public string? ModuleName { get; set; }
+        public string? Category { get; set; }
         public string? Heading { get; set; }
         public string? SubHeading { get; set; }
 
@@ -100,7 +103,7 @@ namespace Prismo.Presentation.Models
             get { return _isSelected; }
             set
             {
-                if (Selectable &&  _isSelected != value)
+                if (Selectable && _isSelected != value)
                 {
                     if (value)
                     {
@@ -112,9 +115,14 @@ namespace Prismo.Presentation.Models
             }
         }
 
-        public static NavigationItemModel Create(string heading, NavKind kind = NavKind.Default, NavIcons icon = NavIcons.Default, string subHeading = null, bool selectable = false)
+        public static NavigationItemModel Create(string heading, string? subHeading = null, NavKind kind = NavKind.Default, NavIcons icon = NavIcons.Default, bool selectable = false)
         {
-            return new NavigationItemModel(heading, kind, icon, subHeading, selectable);
+            return new NavigationItemModel(null, null, heading, subHeading, kind, icon, selectable);
+        }
+
+        public static NavigationItemModel CreateForModule(string moduleName, string? category = null, string? heading = null, string? subHeading = null, NavKind kind = NavKind.Default, NavIcons icon = NavIcons.Default, bool selectable = false)
+        {
+            return new NavigationItemModel(moduleName, category, heading, subHeading, kind, icon, selectable);
         }
 
         protected void OnItemSelected()
@@ -130,7 +138,7 @@ namespace Prismo.Presentation.Models
         {
             if (eventAggregator != null)
             {
-                var payload = new NavigationItemSelectedEventPayload(this,contentView,moduleName);
+                var payload = new NavigationItemSelectedEventPayload(this, contentView, moduleName);
                 eventAggregator.GetEvent<NavigationItemSelectedEvent>().Publish(payload);
             }
         }

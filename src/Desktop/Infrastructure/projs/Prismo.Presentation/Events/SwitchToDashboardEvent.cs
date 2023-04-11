@@ -1,14 +1,13 @@
-﻿using Prism.Mvvm;
+﻿using Prism.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Prismo.ViewModels
+namespace Prismo.Presentation.Events
 {
-    public class DashboardViewModel : BindableBase
+    public class SwitchToDashboardEvent : PubSubEvent<string>
     {
-
     }
 }

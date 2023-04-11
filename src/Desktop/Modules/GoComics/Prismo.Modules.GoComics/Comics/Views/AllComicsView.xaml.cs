@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Prismo.Views
+namespace Prismo.Modules.GoComics.Views
 {
     /// <summary>
-    /// Interaction logic for DashboardPartialView.xaml
+    /// Interaction logic for AllComicsView.xaml
     /// </summary>
-    public partial class DashboardPartialView : UserControl
+    public partial class AllComicsView : UserControl
     {
-        public DashboardPartialView()
+        public AllComicsView()
         {
             InitializeComponent();
         }

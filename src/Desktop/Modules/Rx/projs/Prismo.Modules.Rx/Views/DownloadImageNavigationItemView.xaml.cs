@@ -6,15 +6,15 @@ using System.Windows.Controls;
 namespace Prismo.Modules.Rx.Views
 {
     /// <summary>
-    /// Interaction logic for DownloadImagesNavigationItemView.xaml
+    /// Interaction logic for DownloadImageNavigationItemView.xaml
     /// </summary>
-    public partial class DownloadImagesNavigationItemView : ListBoxItem
+    public partial class DownloadImageNavigationItemView : ListBoxItem
     {
-        public DownloadImagesNavigationItemView(IContainerProvider containerProvider)
+        public DownloadImageNavigationItemView(IContainerProvider containerProvider)
         {
-            var regionManager = containerProvider.Resolve<IRegionManager>();
-
             InitializeComponent();
+
+            var regionManager = containerProvider.Resolve<IRegionManager>();
 
             // Adds the content view for this navigation item; only activates it when user clicks to select.
 
@@ -23,21 +23,21 @@ namespace Prismo.Modules.Rx.Views
             if (regionManager.Regions.ContainsRegionWithName(RegionNames.DynamicContentRegion))
             {
                 region = regionManager.Regions[RegionNames.DynamicContentRegion];
-                var contentView = region.GetView(nameof(DownloadImagesContentView));
+                var contentView = region.GetView(nameof(DownloadImageContentView));
                 if (contentView is null)
                 {
-                    contentView = containerProvider.Resolve<DownloadImagesContentView>();
-                    region.Add(contentView, nameof(DownloadImagesContentView));
+                    contentView = containerProvider.Resolve<DownloadImageContentView>();
+                    region.Add(contentView, nameof(DownloadImageContentView));
                 }
             }
 
-            if (DataContext is ViewModels.DownloadImagesNavigationItemViewModel vm)
+            if (DataContext is ViewModels.DownloadImageNavigationItemViewModel vm)
             {
                 vm.ItemSelected += (s, e) =>
                 {
                     if (region != null)
                     {
-                        var contentView = region.GetView(nameof(DownloadImagesContentView));
+                        var contentView = region.GetView(nameof(DownloadImageContentView));
                         region.Activate(contentView);
                     }
                 };

@@ -3,11 +3,11 @@
 namespace Prismo.Modules.Rx.Views
 {
     /// <summary>
-    /// Interaction logic for DownloadImagesView.xaml
+    /// Interaction logic for DownloadImageContentView.xaml
     /// </summary>
-    public partial class DownloadImagesContentView : UserControl
+    public partial class DownloadImageContentView : UserControl
     {
-        public DownloadImagesContentView()
+        public DownloadImageContentView()
         {
             InitializeComponent();
         }

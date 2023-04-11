@@ -13,8 +13,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <CollectionViewSource x:Key="Navigation-Items-Static"
+        <CollectionViewSource x:Key="StaticNavigationItems"
                               Source="{Binding Path=StaticItems}" />
+        <CollectionViewSource x:Key="DynamicNavigationItems"
+                              Source="{Binding Path=DynamicItems}" />
 
         <Style x:Key="ListBoxGroupByModuleNameStyle" TargetType="{x:Type ListBox}">
             <Setter Property="behaviors:NavigationBarGroupingBehavior.GroupBy" Value="ModuleName" />
@@ -28,13 +30,22 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <ListBox HorizontalContentAlignment="Stretch"
-                 ItemsSource="{Binding Source={StaticResource Navigation-Items-Static}}"
-                 ItemTemplate="{DynamicResource NavigationItemTemplate}" />
-        
-        <ScrollViewer Grid.Row="1"
+                 ItemsSource="{Binding Source={StaticResource StaticNavigationItems}}"
+                 ItemTemplate="{DynamicResource NavigationItemTemplate}"
+                 ItemContainerStyle="{DynamicResource ItemSelectionAwareListBoxItemStyle}" />
+
+        <ListBox Grid.Row="1"
+                 HorizontalContentAlignment="Stretch"
+                 ItemsSource="{Binding Source={StaticResource DynamicNavigationItems}}"
+                 ItemTemplate="{DynamicResource NavigationItemTemplate}"
+                 ItemContainerStyle="{DynamicResource ItemSelectionAwareListBoxItemStyle}"
+                 Style="{StaticResource ListBoxGroupByModuleNameStyle}" />
+
+        <ScrollViewer Grid.Row="2"
                       VerticalScrollBarVisibility="Auto">
             <ContentControl prism:RegionManager.RegionName="{x:Static presentation:RegionNames.NavigationRegion}" />
 
@@ -51,7 +62,7 @@
             </ListBox>-->
         </ScrollViewer>
 
-        <ScrollViewer Grid.Row="2"
+        <ScrollViewer Grid.Row="3"
                       VerticalScrollBarVisibility="Auto">
             <ListBox prism:RegionManager.RegionName="{x:Static presentation:RegionNames.DynamicNavigationRegion}"
                      Style="{StaticResource ListBoxGroupByModuleNameStyle}"

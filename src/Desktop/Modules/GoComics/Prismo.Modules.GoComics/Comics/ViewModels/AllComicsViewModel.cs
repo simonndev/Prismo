@@ -1,14 +1,12 @@
-﻿using Prism.Mvvm;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Prismo.ViewModels
+namespace Prismo.Modules.GoComics.ViewModels
 {
-    public class DashboardViewModel : BindableBase
+    public  class AllComicsViewModel
     {
-
     }
 }
