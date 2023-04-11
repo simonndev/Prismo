@@ -47,7 +47,7 @@ namespace Prismo.Modules.Rx.ViewModels
                 ImageCollection.Clear();
             }
 
-            //IsLoading = true;
+            IsLoading = true;
 
             var imageUrls = new List<string>
             {
