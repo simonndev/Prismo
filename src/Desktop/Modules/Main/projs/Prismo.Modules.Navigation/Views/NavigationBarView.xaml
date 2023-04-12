@@ -33,7 +33,9 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
+        <!-- HACK: set the focus on the Search TextBox (SelectedIndex="1") instead of the Home NavItem -->
         <ListBox HorizontalContentAlignment="Stretch"
+                 SelectedIndex="{Binding Path=SelectedStaticItemIndex, Mode=TwoWay}"
                  ItemsSource="{Binding Source={StaticResource StaticNavigationItems}}"
                  ItemTemplate="{DynamicResource NavigationItemTemplate}"
                  ItemContainerStyle="{DynamicResource ItemSelectionAwareListBoxItemStyle}" />
