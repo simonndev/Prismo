@@ -103,14 +103,11 @@ namespace Prismo.Presentation.Models
             get { return _isSelected; }
             set
             {
-                if (Selectable && _isSelected != value)
+                if (Selectable)
                 {
-                    if (value)
-                    {
-                        OnItemSelected();
-                    }
-
                     SetProperty(ref _isSelected, value);
+
+                    if (value) OnItemSelected();
                 }
             }
         }

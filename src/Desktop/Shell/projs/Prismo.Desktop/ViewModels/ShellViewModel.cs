@@ -42,6 +42,7 @@ namespace Prismo.ViewModels
             OpenModuleCommand = new DelegateCommand(OpenModule);
 
             eventAggregator.GetEvent<SwitchToDashboardEvent>().Subscribe(moduleName => CurrentView = _home);
+            eventAggregator.GetEvent<NavigationItemSelectedEvent>().Subscribe(moduleName => CurrentView = _home);
         }
 
         public event EventHandler ShellContentChanged;
